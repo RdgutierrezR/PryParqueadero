@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Icon } from './Icon.jsx'
 import { accessService } from '../services/access.js'
 import { vehicleService } from '../services/vehicles.js'
+import { InstallAppButton } from './InstallAppButton.jsx'
 
 function initials(name = '') {
   return name
@@ -214,6 +215,8 @@ export function Topbar({ title, section, user, isAdmin, onMenu }) {
             </div>
           )}
         </div>
+
+        <InstallAppButton className="btn btn-secondary btn-sm install-btn" />
 
         <div className="user-chip">
           <span className="avatar sm" aria-hidden="true">
