@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 rem ============================================================
 rem  Parqueadero CUL - Inicio de los servidores
 rem  Levanta el backend (Flask) y el frontend (Vite) en dos
@@ -59,14 +59,14 @@ if /i "%MODO%"=="wifi" (
     echo [2/2] Frontend Vite en todas las interfaces de red
     start "Parqueadero CUL - Frontend" /D "%~dp0front" cmd /k "npm run dev:wifi"
 ) else (
-    echo [2/2] Frontend Vite en http://127.0.0.1:5173
+    echo [2/2] Frontend Vite en https://127.0.0.1:5173
     start "Parqueadero CUL - Frontend" /D "%~dp0front" cmd /k "npm run dev"
 )
 
 echo.
 echo Esperando unos segundos a que arranquen los servidores...
 ping -n 7 127.0.0.1 >nul
-start "" "http://127.0.0.1:5173"
+start "" "https://127.0.0.1:5173"
 
 echo.
 echo ============================================
@@ -81,7 +81,7 @@ if /i "%MODO%"=="wifi" (
     echo   1. Conecta el celular a la misma red WiFi del PC.
     echo   2. En la ventana del Frontend busca la linea "Network:".
     echo   3. Abre en el celular esa direccion. Ejemplo:
-    echo        http://192.168.1.25:5173
+    echo        https://192.168.1.25:5173
     echo.
     echo   Si el celular no carga, permite Node.js en el Firewall de Windows
     echo   para redes privadas. Tambien puedes ejecutar PowerShell como administrador:
@@ -96,3 +96,4 @@ echo   Para detener cada servidor: presiona Ctrl+C en su ventana.
 echo   Para apagar todo: cierra las dos ventanas negras.
 echo.
 pause
+

@@ -188,8 +188,10 @@ npm install
 npm run dev
 ```
 
-Abre **http://127.0.0.1:5173** en el navegador. Vite redirige `/api` al backend
-Flask automáticamente, por lo que no hay que configurar nada más.
+Abre **https://127.0.0.1:5173** en el navegador. Vite redirige `/api` al backend
+Flask automáticamente, por lo que no hay que configurar nada más. El servidor
+frontend corre con **HTTPS local** (certificado auto-firmado) para habilitar la
+cámara y la PWA en el teléfono.
 
 Para compilar una versión de producción del frontend:
 
@@ -207,12 +209,12 @@ de reenviar `/api`, así que **no hay que cambiar CORS** ni exponer Flask a la r
 `iniciar.bat wifi`). La ventana del frontend mostrará algo similar a:
 
 ```
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: http://192.168.1.25:5173/
+  ➜  Local:   https://localhost:5173/
+  ➜  Network: https://192.168.1.25:5173/
 ```
 
 En el celular abre la dirección **Network** (en este ejemplo,
-`http://192.168.1.25:5173`). No uses `localhost` en el celular: esa dirección
+`https://192.168.1.25:5173`). No uses `localhost` en el celular: esa dirección
 apunta al propio teléfono.
 
 También puedes iniciarlo manualmente:
@@ -238,10 +240,14 @@ netsh advfirewall firewall add rule name="Parqueadero CUL 5173" dir=in action=al
 4. Algunos routers tienen **aislamiento de clientes (AP isolation)** activado;
    si es el caso, desactívalo o usa otra red.
 
-> **Cámara y QR:** abrir la app por `http://192.168.x.x:5173` **no** es un
-> contexto seguro, por lo que el navegador del celular bloqueará la cámara para
-> escanear QR. Desde el celular usa la **búsqueda manual por placa**; el escáner
-> con cámara sigue funcionando en el PC con `localhost`.
+> **Cámara y QR:** abrir la app por `https://192.168.x.x:5173` habilita la
+> **cámara para escanear QR** en el teléfono. Sin HTTPS el navegador bloqueará
+> la cámara. En el PC el escáner también funciona en `localhost`.
+
+> **Instalación PWA:** abre la app en el teléfono y usa "Adicionar à tela
+> inicial" o "Instalar aplicativo" que muestra el navegador. Este será el
+> procedimiento recomendado en el demo para verificar la vista móvil del
+> vigilante.
 
 > **Seguridad:** mientras el modo WiFi esté activo, cualquier dispositivo de la
 > red puede llegar a la pantalla de login. Úsalo en una red de confianza, cambia
