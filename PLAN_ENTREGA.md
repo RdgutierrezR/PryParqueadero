@@ -279,25 +279,51 @@ usuario (`KLA897`, “Cristian Camilo Arango Mora”). No se deben borrar.
 
 ---
 
-## 9. Decisiones pendientes
+## 9. Decisiones
 
-1. **Fecha exacta de entrega o sustentación.**
-2. **¿Es una entrega académica con demostración?** ¿Habrá jurado/preguntas?
-3. **¿Qué opción de datos demo usamos?** A, B o C.
-4. **¿Se necesita manual de usuario y/o diapositivas?**
-5. **¿Autorizas crear respaldo e inicializar Git?**
-6. **¿Basta con ejecución local/WiFi o se exige despliegue en internet?**
+### Confirmadas
+
+1. **Fecha límite:** viernes 6 de noviembre de 2026.
+2. **Datos demo:** opción A, base separada `parqueadero.demo.db`.
+3. **Protección:** respaldo de la base e inicialización de Git autorizados.
+
+### Pendientes
+
+1. **¿Es una entrega académica con demostración?** ¿Habrá jurado/preguntas?
+2. **¿Se necesita manual de usuario y/o diapositivas?**
+3. **¿Basta con ejecución local/WiFi o se exige despliegue en internet?**
 
 ---
 
-## 10. Primer bloque de trabajo (hoy)
+## 10. Primer bloque ejecutado (martes 3)
 
-Si se confirma el plan, el primer bloque es:
+- [x] Respaldo de `back/instance/parqueadero.db` creado y verificado.
+- [x] Integridad SQLite comprobada (`ok`).
+- [x] Repositorio Git inicializado con `.gitignore` verificado.
+- [x] Commit base creado: `857c9f1`.
+- [x] Pruebas backend: **51 recolectadas, 0 fallos**.
+- [x] Build frontend: **correcto**, 86 módulos.
+- [x] `CHECKLIST_QA.md` creado.
+- [x] `GUION_DEMO.md` creado.
+- [x] Opción de datos demo confirmada.
 
-1. Crear respaldo de `back/instance/parqueadero.db`.
-2. Inicializar Git con `.gitignore` verificado.
-3. Ejecutar build y pruebas para registrar la línea base.
-4. Crear `CHECKLIST_QA.md` y esqueleto de `GUION_DEMO.md`.
-5. Confirmar la opción de datos demo.
+**Respaldo:**
 
-Con eso queda protegido el proyecto antes de tocar cualquier otra cosa.
+```text
+backups/parqueadero_20261103_101801.db
+SHA256: 86EF556CD04CD618F41C2579821586F34D55B0E66C221CBE09EA5EB7AB7E1394
+Integridad: ok
+```
+
+**Commit base:** `857c9f1 chore: linea base del proyecto y plan de cierre`
+
+---
+
+## 11. Siguiente bloque (miércoles 4)
+
+1. Crear `parqueadero.demo.db` a partir del respaldo.
+2. Implementar el escenario demo con movimientos recientes.
+3. Crear `iniciar_demo.bat` para arrancar con la base demo.
+4. Actualizar README y guía de otro equipo.
+5. Corregir defectos P0 detectados.
+

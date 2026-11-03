@@ -186,7 +186,7 @@ Invoke-WebRequest http://127.0.0.1:5173/ -UseBasicParsing | Select-Object -Expan
 # 3) Pruebas automaticas del backend (opcional pero recomendado)
 cd back
 .\venv\Scripts\python.exe -m pytest
-# Debe devolver: 43 passed
+# Debe devolver: 51 passed
 ```
 
 ---
