@@ -1,8 +1,10 @@
 # Plan integral de cierre — 3 al 6 de noviembre de 2026
 
 > **Supuesto de trabajo:** el sistema ya está construido y funcional. El objetivo
-> de esta semana es **dejarlo listo para entrega y demostración**, no rehacerlo
-> ni agregar funcionalidades grandes. Si el objetivo es otro, ajustamos el plan.
+> de esta semana es **dejarlo listo para entrega y demostración**, agregando
+> además una **vista móvil del vigilante como PWA** sobre HTTPS local, sin
+> rehacer el sistema ni agregar funcionalidades grandes. Si el objetivo es otro,
+> ajustamos el plan.
 
 ## Decisiones confirmadas
 
@@ -12,6 +14,12 @@
 | Datos demo | **Opción A: base demo separada y ficticia** (`parqueadero.demo.db`) |
 | Protección | **Autorizado:** respaldo de la base e inicialización de Git |
 | Fin de semana | Sábado 7 y domingo 8 quedan como respaldo/contingencia |
+| Alcance móvil | El vigilante puede buscar por placa, registrar entrada/salida, ver ocupación e historial |
+| Móvil/PWA | Sí, se agrega instalación como app (PWA) |
+| Esqueleto del parqueadero | Sí, vista esquemática con la capacidad real configurada |
+| HTTPS en el teléfono | Sí, certificado auto-firmado aceptado (habilita cámara QR e instalación PWA) |
+| Escaneo QR en el móvil | Sí, se valida sobre HTTPS |
+| Offline | No requerido: misma WiFi, sin modo offline |
 
 ---
 
@@ -70,17 +78,21 @@
 | Arranque | Iniciar el backend apuntando a la base demo | `iniciar_demo.bat` (nuevo) | No |
 | Documentación | Manual de usuario y ajustes de guías | `MANUAL_USUARIO.md` (nuevo), `README.md`, `PARA_EJECUTAR_EN_OTRO_EQUIPO.md` | No |
 | QA | Ejecutar el checklist y registrar defectos | `CHECKLIST_QA.md` | No |
+| Móvil/PWA | Habilitar HTTPS en dev y convertir la vista del vigilante en app móvil instalable | `vite.config.js`, `manifest.json`, service worker, `AppLayout.jsx`/`Topbar.jsx` | No |
+| Esqueleto del parqueadero | Vista esquemática basada en la capacidad configurada | Nuevo componente (por ejemplo `ParkingMap.jsx`) y página móvil | No |
 | Código | Solo corregir defectos confirmados por QA | `front/src/**` o `back/app/**` puntual | No |
 | Diseño | Solo ajustes si QA detecta problemas de responsive o accesibilidad | `global.css` o JSX puntual | No |
-| Opcional | Nada de funcionalidades nuevas | — | — |
 
 **Lo que NO se toca:**
 
 - Esquema de la base de datos, rutas, autenticación, roles ni lógica de negocio.
 - La base de datos real.
 - El rediseño visual ya terminado.
-- Dependencias nuevas (salvo que un defecto lo exija y se justifique).
-- Despliegue en internet o HTTPS.
+- Despliegue en internet o dominio público (el HTTPS es solo de red local).
+
+**Dependencia nueva justificada:** `@vitejs/plugin-basic-ssl` (o equivalente) solo
+para servir HTTPS en desarrollo y poder usar la cámara e instalar la PWA en el
+teléfono. No entra en producción.
 
 **Regla de decisión:** si un cambio no ayuda a entregar/demostrar el sistema y no
 corrige un defecto confirmado, no entra en esta semana.
@@ -93,15 +105,19 @@ Al finalizar el **viernes 6 de noviembre**:
 
 - [ ] El proyecto arranca desde cero con `instalar.bat` e `iniciar.bat`.
 - [ ] Administrador y vigilante completan todos sus flujos sin errores P0/P1.
+- [ ] El vigilante puede usar la vista móvil por WiFi con HTTPS: placa, entrada/salida,
+      ocupación e historial.
+- [ ] La vista móvil del vigilante se puede instalar como PWA en el teléfono.
+- [ ] La vista del parqueadero muestra un esqueleto esquemático con la capacidad real.
+- [ ] El escaneo QR con cámara funciona en el teléfono sobre HTTPS.
 - [ ] La demo se puede repetir con datos recientes y sin depender de la fecha.
 - [ ] Existe un respaldo de la base y se probó su restauración.
 - [ ] El proyecto está en Git con un commit base.
 - [ ] README, guía de otro equipo y manual de usuario están al día.
 - [ ] Guion de demo de 5–7 minutos ensayado.
-- [ ] Acceso desde celular probado en la red WiFi real.
 
 **Definición de “listo”:** build correcto, 51 pruebas en verde, checklist QA
-completo y demo ensayada sin bloqueos.
+completo, PWA del vigilante probada en el teléfono y demo ensayada sin bloqueos.
 
 ---
 
@@ -114,13 +130,19 @@ completo y demo ensayada sin bloqueos.
 - Escenario de datos demo reproducible.
 - QA de roles, formularios, errores de red, responsive y accesibilidad básica.
 - Documentación y guion de sustentación.
+- **Vista móvil del vigilante (PWA) sobre HTTPS:** placa, entrada/salida,
+  ocupación, historial y esqueleto esquemático del parqueadero.
+- Escaneo QR con cámara validado en el teléfono (depende del HTTPS local).
 - Prueba de acceso desde el celular.
 
 ### No incluido (salvo que sea requisito explícito)
 
-- Nuevas funcionalidades (pagos, reservas, reportes PDF, etc.).
-- Despliegue en internet, HTTPS o dominio.
+- Nuevas funcionalidades distintas a la vista móvil (pagos, reservas, PDF…).
+- Despliegue en internet, dominio público o HTTPS con autoridad válida,
+  más allá del certificado auto-firmado de la red local.
 - Aplicación móvil nativa.
+- Modo offline / sincronización sin conexión.
+- Plano real del parqueadero con sectores y espacios fijos (se deja esquemático).
 - Reescritura del diseño o cambio de arquitectura.
 - Migración a PostgreSQL.
 
@@ -142,6 +164,16 @@ completo y demo ensayada sin bloqueos.
 | 8 | Prueba de instalación/arranque limpio | `instalar.bat` + `iniciar.bat` funcionando |
 | 9 | Prueba desde celular por WiFi | Login y operación básica desde el teléfono |
 | 10 | Ensayo de demo | Guion cronometrado y contingencia lista |
+
+### P0 extendido — Vista móvil del vigilante
+
+| # | Tarea | Resultado esperado |
+|---|---|---|
+| 11 | HTTPS local con certificado auto-firmado | Vite accesible por HTTPS en la red; teléfono acepta el certificado |
+| 12 | Manifest y service worker de la PWA | Iconos y metadatos correctos; app instalable en el teléfono |
+| 13 | Vista móvil del vigilante | Placa, entrada/salida, ocupación e historial usables en 360 px |
+| 14 | Esqueleto esquemático del parqueadero | Cuadrícula con la capacidad real y espacios ocupados marcados |
+| 15 | Escaneo QR con cámara en el móvil | Validación por token sobre HTTPS |
 
 ### P1 — Recomendado
 
@@ -176,37 +208,42 @@ completo y demo ensayada sin bloqueos.
 
 **Entregable:** respaldo + repositorio + línea base + checklist.
 
-### Miércoles 4 — Datos demo y documentación
+### Miércoles 4 — Datos demo, móvil y PWA
 
-- Implementar el escenario demo elegido (base separada o respaldo/restauración).
-- Actualizar README y guía de otro equipo.
-- Redactar manual de usuario.
-- Corregir defectos P0 detectados en la auditoría.
+- Implementar la base demo ficticia y el escenario de movimientos recientes.
+- Crear `iniciar_demo.bat` para arrancar con la base demo.
+- Habilitar HTTPS en Vite (certificado auto-firmado) para servir la vista móvil.
+- Preparar manifest y service worker de la PWA.
+- Crear la vista esquemática del parqueadero (cuadrícula con capacidad real).
+- Integrar la búsqueda por placa, entrada/salida, ocupación e historial en el móvil.
+- Corregir defectos P0 detectados.
 
-**Entregable:** demo reproducible + documentación v1.
+**Entregable:** demo reproducible + vista móvil del vigilante funcionando por HTTPS.
 
-### Jueves 5 — QA funcional (pasada 1)
+### Jueves 5 — QA funcional, QR en móvil y manual
 
 - Login, logout, roles y rutas protegidas.
 - Dashboard, solicitudes, vehículos, personas.
 - Historial, reportes y configuración.
-- Acceso, ocupación y códigos QR.
+- Acceso, ocupación y códigos QR en PC y **en el teléfono**.
+- Probar la PWA instalada en el celular (placa, entrada/salida, mapa, historial).
 - Registrar cada defecto con pasos y severidad.
+- Redactar manual de usuario y ajustar documentación.
 
-**Entregable:** informe QA con defectos priorizados.
+**Entregable:** informe QA con defectos priorizados + manual de usuario.
 
-### Viernes 6 — QA final, cierre y entrega
+### Viernes 6 — QA final, PWA y entrega
 
 - Validaciones inline y errores del servidor.
 - Toasts y confirmaciones.
 - Backend apagado / errores de red.
 - Responsive 360/768/1280 y teclado.
 - Instalación y arranque limpio.
-- Prueba real desde el celular.
+- Prueba real de la PWA en el celular (placa, entrada/salida, QR, mapa).
 - Ensayo completo de la demo con cronómetro.
 - Respaldo final, commit de cierre y entrega.
 
-**Entregable:** versión final sin P0/P1 abiertos + paquete de entrega.
+**Entregable:** versión final sin P0/P1 abiertos + PWA del vigilante probada + paquete de entrega.
 
 ### Sábado 7 — Buffer de contingencia
 
@@ -314,7 +351,8 @@ usuario (`KLA897`, “Cristian Camilo Arango Mora”). No se deben borrar.
 |---|---|---|---|
 | Pérdida de datos | Media | Alto | Respaldo antes de cualquier cambio + base demo separada |
 | Firewall/router bloquea el celular | Media | Medio | Probar antes; regla de firewall; fallback en PC |
-| Cámara QR no funciona por HTTP | Alta | Bajo | Búsqueda manual por placa; demo QR en el PC |
+| Cámara QR no funciona por HTTP | Baja (con HTTPS) | Bajo | Fallback a búsqueda manual por placa; demo QR en el PC |
+| Certificado auto-firmado bloquea la instalación PWA | Media | Medio | Fallback: instalar vía Chrome flag / mkcert, o usar la app como web normal con placa |
 | Datos demo con fechas viejas | Alta | Medio | Escenario demo reciente |
 | Falta de tiempo | Media | Alto | Congelar alcance; solo P0 |
 | Cambios sin historial previo | Alta | Medio | Mitigado: commit base `857c9f1` |
