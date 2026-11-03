@@ -9,40 +9,81 @@
 | Tema | Decisión |
 |---|---|
 | Fecha límite | **Viernes 6 de noviembre de 2026** |
-| Datos demo | **Opción A: base demo separada** (`parqueadero.demo.db`) |
+| Datos demo | **Opción A: base demo separada y ficticia** (`parqueadero.demo.db`) |
 | Protección | **Autorizado:** respaldo de la base e inicialización de Git |
 | Fin de semana | Sábado 7 y domingo 8 quedan como respaldo/contingencia |
 
 ---
 
-## 1. Estado de partida (verificado)
+## 1. Estado de partida y base del plan
 
-| Área | Estado actual |
+### 1.1 Evidencia revisada (3 de noviembre)
+
+| Evidencia | Resultado | Qué implica |
+|---|---|---|
+| `pytest` en `back/` | 51 pruebas, 0 fallos | El backend está sano; no se reescribe |
+| `npm run build` en `front/` | 86 módulos, build correcto | El frontend compila; no se rehace |
+| Consulta a SQLite | 6 personas, 7 vehículos, 8 movimientos, 0 dentro; último movimiento el 31-oct | Los KPIs de “hoy” se ven vacíos; hace falta un escenario demo |
+| `git status` | El proyecto no era repositorio | Riesgo de pérdida; ya se creó Git |
+| `PARA_EJECUTAR_EN_OTRO_EQUIPO.md` | Decía “43 passed” | Documentación desactualizada |
+| Prueba por LAN | Vite en `0.0.0.0:5173`, Flask en `127.0.0.1:5000`, login por IP correcto | El WiFi sirve; la cámara QR requiere HTTPS |
+| Búsqueda de `TODO/FIXME` | Sin pendientes marcados | No hay deuda crítica evidente |
+| Pruebas E2E y lint | No existen | El cierre se apoya en QA manual con checklist |
+| Responsive | Verificado solo a 800 px | Falta probar 360/768/1280 px |
+| Datos reales | `KLA897`, “Cristian Camilo Arango Mora” | No se tocan; la demo va en base aparte |
+
+### 1.2 Estado actual
+
+| Área | Estado |
 |---|---|
-| Backend | Flask + SQLAlchemy + SQLite, autenticación por sesión y CSRF |
-| Frontend | React + Vite, diseño responsive, componentes reutilizables |
+| Backend | Flask + SQLAlchemy + SQLite, sesión y CSRF |
+| Frontend | React + Vite, componentes reutilizables |
 | Roles | Administrador y vigilante con rutas protegidas |
 | Módulos | Login, dashboard, solicitudes, vehículos, personas, historial, reportes, configuración, acceso y ocupación |
-| Pruebas backend | **51 pruebas ejecutadas, sin fallos** |
+| Pruebas backend | **51 pruebas, 0 fallos** |
 | Build frontend | **Correcto** (86 módulos) |
-| Acceso WiFi | Funcionando; Vite en `0.0.0.0:5173`, Flask solo en `127.0.0.1:5000` |
-| Datos actuales | 6 personas, 7 vehículos, 8 movimientos, 0 dentro |
-| Datos de usuario | `KLA897` y “Cristian Camilo Arango Mora” **no deben borrarse** |
-| Control de versiones | **No hay repositorio Git** |
-| Calidad automatizada | Sin lint ni pruebas E2E; QA manual |
-| Documentación | README y guía de otro equipo, con algunos datos desactualizados |
+| Acceso WiFi | Funcionando; Vite expuesto en la red, Flask solo local |
+| Respaldo | `backups/parqueadero_20261103_101801.db`, SHA256 verificado, integridad `ok` |
+| Git | Inicializado; commits `857c9f1` y `0bb68a5` |
+| Documentación | Conteo de pruebas corregido; manual de usuario pendiente |
+| Demo | Pendiente: base ficticia separada con movimientos recientes |
+| QA | `CHECKLIST_QA.md` y `GUION_DEMO.md` creados; ejecución pendiente |
 
-### Brechas detectadas
+### 1.3 Brechas que justifican el plan
 
-1. No hay respaldo formal de la base de datos ni procedimiento de restauración.
-2. No hay repositorio Git ni historial de cambios.
-3. La documentación aún dice “43 passed” en la guía de otro equipo.
-4. Los datos demo tienen fechas de octubre; para una demo en noviembre los KPIs
-   de “hoy” se ven vacíos.
-5. La cámara QR no funciona por WiFi HTTP (limitación del navegador).
-6. Solo se verificó el responsive a 800 px; faltan 360/768/1280 px.
-7. No hay manual de usuario ni guion de demostración.
-8. No hay checklist de aceptación ni registro formal de defectos.
+1. Los datos actuales son de octubre y no hay vehículos dentro: la demo se vería
+   vacía en los indicadores de “hoy”.
+2. La cámara QR no funciona por WiFi HTTP: hay que documentarlo y usar la
+   búsqueda por placa en el celular.
+3. El responsive solo se probó a 800 px: faltan 360, 768 y 1280 px.
+4. No hay manual de usuario.
+5. No hay pruebas E2E ni lint: el cierre se hace con QA manual.
+6. Quedan detalles de documentación por revisar.
+7. No hay despliegue de producción ni HTTPS; está fuera de alcance salvo que sea
+   un requisito explícito.
+
+### 1.4 Qué cambia y qué no cambia
+
+| Tipo | Cambio propuesto | Archivos | ¿Toca datos reales? |
+|---|---|---|---|
+| Datos demo | Crear una base **ficticia** separada con movimientos recientes | `back/instance/parqueadero.demo.db`, `back/seed_demo_scenario.py` (nuevo) | No |
+| Arranque | Iniciar el backend apuntando a la base demo | `iniciar_demo.bat` (nuevo) | No |
+| Documentación | Manual de usuario y ajustes de guías | `MANUAL_USUARIO.md` (nuevo), `README.md`, `PARA_EJECUTAR_EN_OTRO_EQUIPO.md` | No |
+| QA | Ejecutar el checklist y registrar defectos | `CHECKLIST_QA.md` | No |
+| Código | Solo corregir defectos confirmados por QA | `front/src/**` o `back/app/**` puntual | No |
+| Diseño | Solo ajustes si QA detecta problemas de responsive o accesibilidad | `global.css` o JSX puntual | No |
+| Opcional | Nada de funcionalidades nuevas | — | — |
+
+**Lo que NO se toca:**
+
+- Esquema de la base de datos, rutas, autenticación, roles ni lógica de negocio.
+- La base de datos real.
+- El rediseño visual ya terminado.
+- Dependencias nuevas (salvo que un defecto lo exija y se justifique).
+- Despliegue en internet o HTTPS.
+
+**Regla de decisión:** si un cambio no ayuda a entregar/demostrar el sistema y no
+corrige un defecto confirmado, no entra en esta semana.
 
 ---
 
@@ -234,15 +275,18 @@ completo y demo ensayada sin bloqueos.
 **Restricción:** la base actual contiene datos que parecen reales o de pruebas del
 usuario (`KLA897`, “Cristian Camilo Arango Mora”). No se deben borrar.
 
-### Opción A — Base demo separada (recomendada)
+### Opción A — Base demo separada y ficticia (recomendada)
 
-- Copiar la base actual a `back/instance/parqueadero.demo.db`.
-- Crear un script que genere movimientos recientes sobre esa copia.
-- Añadir un `iniciar_demo.bat` que arranque con `DATABASE_URL` apuntando a la
-  base demo.
-- La base real queda intacta.
+- Crear `back/instance/parqueadero.demo.db` **desde cero**, sin copiar los datos
+  reales.
+- Reutilizar `seed_demo.py` para usuarios, personas y vehículos ficticios.
+- Crear `back/seed_demo_scenario.py` para agregar movimientos recientes y un
+  vehículo dentro.
+- Añadir `iniciar_demo.bat` que arranque con `DATABASE_URL` apuntando a la base
+  demo.
+- La base real queda intacta y la demo no muestra datos personales reales.
 
-**Ventaja:** demos repetibles sin riesgo.
+**Ventaja:** demo repetible, sin riesgo y sin exponer datos reales.
 **Costo:** un script y un `.bat` adicionales.
 
 ### Opción B — Respaldo y restauración
@@ -273,7 +317,7 @@ usuario (`KLA897`, “Cristian Camilo Arango Mora”). No se deben borrar.
 | Cámara QR no funciona por HTTP | Alta | Bajo | Búsqueda manual por placa; demo QR en el PC |
 | Datos demo con fechas viejas | Alta | Medio | Escenario demo reciente |
 | Falta de tiempo | Media | Alto | Congelar alcance; solo P0 |
-| No hay Git | Alta | Medio | Inicializar hoy y commit base |
+| Cambios sin historial previo | Alta | Medio | Mitigado: commit base `857c9f1` |
 | Documentación desactualizada | Alta | Bajo | Revisión el miércoles |
 | Falla el día de la demo | Baja | Alto | Copia offline + ensayo + video/capturas |
 
@@ -284,7 +328,7 @@ usuario (`KLA897`, “Cristian Camilo Arango Mora”). No se deben borrar.
 ### Confirmadas
 
 1. **Fecha límite:** viernes 6 de noviembre de 2026.
-2. **Datos demo:** opción A, base separada `parqueadero.demo.db`.
+2. **Datos demo:** opción A, base ficticia separada `parqueadero.demo.db`.
 3. **Protección:** respaldo de la base e inicialización de Git autorizados.
 
 ### Pendientes
@@ -321,7 +365,7 @@ Integridad: ok
 
 ## 11. Siguiente bloque (miércoles 4)
 
-1. Crear `parqueadero.demo.db` a partir del respaldo.
+1. Crear `parqueadero.demo.db` desde cero con datos ficticios.
 2. Implementar el escenario demo con movimientos recientes.
 3. Crear `iniciar_demo.bat` para arrancar con la base demo.
 4. Actualizar README y guía de otro equipo.
