@@ -1,0 +1,23 @@
+{
+  "name": "parqueadero-cul-front",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Frontend del Sistema Web de Control y Gestión del Parqueadero CUL",
+  "scripts": {
+    "dev": "vite",
+    "dev:wifi": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "jsqr": "^1.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.5"
+  }
+}

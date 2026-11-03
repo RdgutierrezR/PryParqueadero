@@ -1,0 +1,32 @@
+# Dependencias
+front/node_modules/
+back/venv/
+back/.venv/
+back/env/
+
+# Base de datos y datos locales
+back/instance/
+*.db
+*.sqlite3
+backups/
+
+# Artefactos de compilación del frontend
+front/dist/
+
+# Variables de entorno
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Sistema y editores
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
