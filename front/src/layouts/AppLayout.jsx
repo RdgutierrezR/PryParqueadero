@@ -6,6 +6,7 @@ import { ConfirmDialog } from '../components/ConfirmDialog.jsx'
 import { useAuth } from '../context/useAuth.js'
 import { useToast } from '../context/ToastContext.jsx'
 import { lockScroll, unlockScroll } from '../utils/scrollLock.js'
+import { MobileNav } from '../components/MobileNav.jsx'
 
 /**
  * Estructura común de la aplicación: barra lateral, cabecera y contenido.
@@ -20,6 +21,8 @@ export function AppLayout({ title, section, label, nav, children }) {
   const [confirmLogout, setConfirmLogout] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
   const isAdmin = user?.role === 'administrador'
+  const flatNav = nav.flatMap((group) => group.items)
+  const showMobileNav = flatNav.length <= 4
 
   // Cierra el menú móvil al cambiar de ruta.
   useEffect(() => {
@@ -91,6 +94,9 @@ export function AppLayout({ title, section, label, nav, children }) {
           <main className="page" id="contenido">
             {children}
           </main>
+          {showMobileNav && (
+            <MobileNav nav={nav} />
+          )}
         </div>
       </div>
 

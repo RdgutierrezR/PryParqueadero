@@ -3,6 +3,7 @@ import { accessService } from '../services/access.js'
 import { Alert } from '../components/Alert.jsx'
 import { OccupancyBar, OccupancyDonut, StatCard, occupancyLevel } from '../components/StatCard.jsx'
 import { Badge } from '../components/Badge.jsx'
+import { ParkingMap } from '../components/ParkingMap.jsx'
 import { PageHeader } from '../components/PageHeader.jsx'
 import { Icon } from '../components/Icon.jsx'
 import GuardLayout from '../layouts/GuardLayout.jsx'
@@ -159,6 +160,8 @@ export default function OccupancyPage() {
                 </div>
               </div>
             </section>
+
+            <ParkingMap inside={data.inside} capacity={data.capacity} />
           </>
         )
       )}
