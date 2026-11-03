@@ -61,9 +61,11 @@ Doble clic en **`iniciar.bat`**. Se abren dos ventanas negras:
 | Ventana | Contenido | Dirección |
 |---|---|---|
 | `Parqueadero CUL - Backend` | Flask | http://127.0.0.1:5000 |
-| `Parqueadero CUL - Frontend` | Vite | http://127.0.0.1:5173 |
+| `Parqueadero CUL - Frontend` | Vite | https://127.0.0.1:5173 |
 
-El navegador se abre solo en `http://127.0.0.1:5173`.
+El navegador se abre solo en `https://127.0.0.1:5173`. El frontend corre con
+**HTTPS local** (certificado auto-firmado) para habilitar la PWA y la cámara en
+el teléfono.
 
 **Para detener:** `Ctrl + C` en cada ventana, o simplemente cerrar las dos
 ventanas negras.
@@ -78,7 +80,7 @@ Credenciales de demostración (si cargaste los datos):
 1. Conecta el celular a la **misma red WiFi** del computador.
 2. Ejecuta **`iniciar_wifi.bat`** (o `iniciar.bat wifi`).
 3. En la ventana del frontend busca la línea **`Network:`**, por ejemplo:
-   `http://192.168.1.25:5173/`.
+   `https://192.168.1.25:5173/`.
 4. Abre esa dirección en el navegador del celular. **No uses `localhost`** en el
    teléfono: esa dirección apunta al propio teléfono.
 
@@ -95,6 +97,9 @@ netsh advfirewall firewall add rule name="Parqueadero CUL 5173" dir=in action=al
 >
 > La cámara para escanear QR requiere un contexto seguro (`localhost` o HTTPS),
 > así que por WiFi desde el celular usa la **búsqueda manual por placa**.
+>
+> En el teléfono también puedes instalar la **PWA** usando la opción de Chrome
+> "Adicionar à tela inicial" o "Instalar aplicativo".
 
 ---
 
