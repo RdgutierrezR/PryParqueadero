@@ -425,11 +425,46 @@ Integridad: ok
 
 ---
 
-## 12. Tercer bloque (jueves 5 y viernes 6)
+## 12. Tercer bloque ejecutado (jueves 5 / viernes 6)
 
-1. QA funcional por rol y registro de defectos.
-2. baja/boot del backend y verificar mensajes.
-3. PWA en el teléfono (podría necesitar ayuda del dueño del móvil).
-4. `MANUAL_USUARIO.md` finalando.
-5. Respaldo final y commit de cierre.
+- [x] QA funcional por HTTP (`back/qa_full_demo.py`): 35 casos, todos OK.
+      Cubre personas, vehículos, decisiones, QR, entrada/salida,
+      ocupación, historial, reportes, export CSV y bloqueos por rol.
+- [x] `CHECKLIST_QA.md` con 30 casos marcados `OK (API)` y evidencia.
+- [x] `MANUAL_USUARIO.md` creado (por rol y PWA).
+- [x] Respaldo final: base real + base demo con SHA256 e integridad `ok`.
+- [x] Commit final de entrega.
+
+**Pendiente depende del teléfono:**
+- [ ] Probar la PWA desde el dispositivo (instalación y cámara QR).
+
+---
+
+## 13. Respaldo final
+
+```text
+backups/parqueadero_20261106_090454.db
+  SHA256: 86EF556CD04CD618F41C2579821586F34D55B0E66C221CBE09EA5EB7AB7E1394
+  Integridad: ok
+
+backups/parqueadero_demo_20261106_090454.db
+  SHA256: BDF230A419AFCAF302E705844783426B60F7084D62B9B4A80C4C5F8BE7EED092
+  Integridad: ok
+```
+
+---
+
+## 14. Resultado final de la entrega
+
+| Área | Estado |
+|---|---|
+| Backend | 51 tests en verde, API demo verificada |
+| Frontend | Build correcto, PWA instalable, esqueleto esquemático |
+| Datos demo | Base separada con movimientos recientes |
+| Datos reales | Intactos; respaldo SHA256 verificado |
+| Documentación | README, guía de otro equipo, checklist QA, guion demo y manual usuario |
+| Git | Historial completo y commits de cierre |
+
+**Lo único fuera del alcance de este script:** prueba física de la PWA y el QR
+en el teléfono del usuario (pendiente del dispositivo).
 
