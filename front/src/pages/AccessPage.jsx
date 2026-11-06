@@ -19,7 +19,7 @@ export default function AccessPage() {
   const [error, setError] = useState('')
   const [fieldError, setFieldError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [mode, setMode] = useState('plate') // 'plate' | 'qr'
+  const [mode, setMode] = useState('plate') // 'plate' | 'qr' | 'none' (oculto cuando hay resultado)
   const busyRef = useRef(false)
 
   const reset = () => {
@@ -27,6 +27,7 @@ export default function AccessPage() {
     setPlate('')
     setError('')
     setFieldError('')
+    setMode('plate')
   }
 
   const validateByPlate = async (event) => {
@@ -59,17 +60,27 @@ export default function AccessPage() {
       busyRef.current = true
       setLoading(true)
       setError('')
+      // Feedback táctil inmediato: se sabe que leyó algo aunque la validación tarde.
+      navigator.vibrate?.(80)
       try {
         const res = await accessService.validate({ token })
         setResult(res.data)
+        // Éxito: cerrar la cámara y dejar SOLO la tarjeta del vehículo.
+        setMode('none')
+        toast.success(
+          'Código QR detectado',
+          `Vehículo ${res.data.vehicle.plate} identificado correctamente.`,
+        )
       } catch (err) {
         setError(err.message)
+        setMode('none')
+        toast.error('Código QR no válido', err.message)
       } finally {
         busyRef.current = false
         setLoading(false)
       }
     },
-    [],
+    [toast],
   )
 
   const handleEntry = async () => {
@@ -157,8 +168,7 @@ export default function AccessPage() {
         </div>
 
         {mode === 'plate' ? (
-          <form className="access-search" onSubmit={validateByPlate} noValidate>
-            <FormField
+          <form className="access-search" onSubmit={validateByPlate} noValidate>  <FormField
               label="Placa del vehículo"
               htmlFor="access-plate"
               required
@@ -190,9 +200,9 @@ export default function AccessPage() {
               {loading ? 'Consultando…' : 'Consultar'}
             </button>
           </form>
-        ) : (
+        ) : mode === 'qr' ? (
           <QRScanner onDetected={handleQrDetected} active={mode === 'qr'} />
-        )}
+        ) : null}
       </section>
 
       {result && (
