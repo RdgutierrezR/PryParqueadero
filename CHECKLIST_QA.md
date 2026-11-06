@@ -20,7 +20,7 @@
 | Navegador y versión | |
 | Sistema operativo | Windows |
 | Backend | `http://127.0.0.1:5000` |
-| Frontend | `http://127.0.0.1:5173` |
+| Frontend | `https://127.0.0.1:5173` |
 | Viewports probados | 360 × 740 / 768 × 1024 / 1280 × 800 |
 | Usuarios | `admin` / `vigilante` |
 
@@ -182,7 +182,50 @@
 
 ---
 
-## 11. Calidad transversal
+## 11. Vista móvil y PWA
+
+> Se hacen con el backend en la base demo y el sistema expuesto por HTTPS.
+> El teléfono debe estar en la misma WiFi del PC. No se usa ni modo offline ni
+> datos sembrados en el teléfono.
+
+### Backend / HTTPS
+
+| ID | Caso | Resultado | Evidencia |
+|---|---|---|---|
+| PWA-01 | El frontend responde en `https://127.0.0.1:5173` desde el PC | | |
+| PWA-02 | El certificado auto-firmado se puede aceptar sin romper la app | | |
+| PWA-03 | `/manifest.webmanifest` está disponible | | |
+| PWA-04 | `/sw.js` se registra sin errores en la consola | | |
+| PWA-05 | Los iconos `/icons/icon-192.png` y `/icons/icon-512.png` cargan | | |
+
+### Instalación como app
+
+| ID | Caso | Resultado | Evidencia |
+|---|---|---|---|
+| PWA-06 | El botón "Instalar app" se muestra cuando el navegador lo permite | | |
+| PWA-07 | Al aceptar, la app queda instalada y se abre sin barra de navegador | | |
+| PWA-08 | La app instalada respeta sesión y roles | | |
+| PWA-09 | Se puede desinstalar y volver a instalar sin romper el sistema | | |
+| PWA-10 | La app no muestra errores críticos al abrir (foco, responsive) | | |
+
+### Vista móvil del vigilante
+
+| ID | Caso | Resultado | Evidencia |
+|---|---|---|---|
+| PWA-11 | El menú inferior muestra las rutas del vigilante | | |
+| PWA-12 | Búsqueda por placa usable a 360 px | | |
+| PWA-13 | Validación y registro de entrada/salida usable a 360 px | | |
+| PWA-14 | Ocupación con esqueleto esquemático visible a 360 px | | |
+| PWA-15 | Historial usable a 360 px y sin desbordes | | |
+| PWA-16 | QR por cámara desde el móvil sobre HTTPS | | |
+| PWA-17 | El vigilante no accede a rutas de administrador en el móvil | | |
+
+> **Nota:** si el teléfono todavía no puede abrir la app, se marca como defecto
+> **P0** del frente móvil para resolverlo antes de la demo.
+
+---
+
+## 12. Calidad transversal
 
 ### Responsive
 
@@ -223,7 +266,7 @@
 
 ---
 
-## 12. Regresión y cierre
+## 13. Regresión y cierre
 
 - [ ] Build de producción correcto.
 - [ ] Pruebas backend en verde.
@@ -238,7 +281,7 @@
 
 ---
 
-## 13. Registro de defectos
+## 14. Registro de defectos
 
 | ID | Módulo | Severidad | Descripción | Pasos para reproducir | Evidencia | Estado |
 |---|---|---|---|---|---|---|
@@ -254,7 +297,7 @@
 
 ---
 
-## 14. Resultado final
+## 15. Resultado final
 
 | Campo | Valor |
 |---|---|

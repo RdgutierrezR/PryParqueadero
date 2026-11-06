@@ -108,6 +108,7 @@ PryParqueadero/
 ├── instalar.bat                   # Instalación automática (una vez por equipo)
 ├── iniciar.bat                    # Levanta backend + frontend y abre el navegador
 ├── iniciar_wifi.bat               # Igual, pero permite abrirlo desde el celular por WiFi
+├── iniciar_demo.bat               # Igual, pero usa la base demo ficticia
 ├── .gitignore
 ├── README.md
 └── PARA_EJECUTAR_EN_OTRO_EQUIPO.md
@@ -127,13 +128,14 @@ PryParqueadero/
 
 ### 5.0 Opción rápida: los dos scripts `.bat`
 
-En la raíz del proyecto hay dos scripts que hacen todo:
+En la raíz del proyecto hay varios scripts que hacen todo:
 
 | Script | Cuándo se usa | Qué hace |
 |---|---|---|
 | `instalar.bat` | **Una sola vez** por equipo | Comprueba Python/Node, crea `back\venv`, instala las dependencias del backend y del frontend, crea la base de datos y pregunta si quieres cargar los datos demo |
-| `iniciar.bat` | Cada vez que se vaya a usar | Levanta el backend y el frontend en dos ventanas y abre el navegador en `http://127.0.0.1:5173` |
+| `iniciar.bat` | Cada vez que se vaya a usar | Levanta el backend y el frontend en dos ventanas y abre el navegador en `https://127.0.0.1:5173` |
 | `iniciar_wifi.bat` | Para abrirlo también desde el celular | Levanta todo y expone **solo el frontend** en la red WiFi local; la ventana de Vite muestra la dirección `Network` que debes abrir en el teléfono |
+| `iniciar_demo.bat` | Para demo/ensayo con datos ficticios | Levanta el sistema apuntando a `back\instance\parqueadero.demo.db`; los datos reales quedan intactos |
 
 Doble clic en `instalar.bat` → espera al mensaje *"Instalación completada
 correctamente"* → doble clic en `iniciar.bat` → listo. Para detener los

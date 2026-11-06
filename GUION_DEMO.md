@@ -10,7 +10,7 @@
 ## 1. Antes de empezar (5 minutos antes)
 
 - [ ] Backend y frontend funcionando.
-- [ ] Base demo cargada con movimientos recientes.
+- [ ] Base demo cargada con movimientos recientes (`iniciar_demo.bat`).
 - [ ] Un vehículo dentro del parqueadero para mostrar ocupación.
 - [ ] Una solicitud pendiente para mostrar aprobación.
 - [ ] Sesión de administrador iniciada en una pestaña.
@@ -39,7 +39,7 @@
 
 ### 0:30–1:00 — Login administrador
 
-- Abrir `http://127.0.0.1:5173`.
+- Abrir `https://127.0.0.1:5173`.
 - Iniciar sesión como `admin`.
 - Mencionar que la sesión y los permisos están protegidos por rol.
 
@@ -106,14 +106,21 @@ datos escritos a mano.
 
 **Mensaje clave:** el vigilante no puede saltarse las reglas del sistema.
 
-### 6:30–7:00 — Ocupación y cierre
+### 6:30–7:00 — Ocupación, esqueleto y PWA
 
 - Abrir **Ocupación**.
 - Mostrar el vehículo que acaba de ingresar y el porcentaje actualizado.
+- Señalar el **esqueleto esquemático del parqueadero** (cuadrícula con la
+  capacidad real y los espacios ocupados en verde).
+- Mostrar el botón **“Instalar app”** encima del usuario y explicar:
+  la vista del vigilante se puede usar desde el teléfono como app (PWA)
+  cuando el navegador permite la instalación y el carrito del PC queda
+  expuesto por HTTPS.
 - Cerrar con:
 
 > “El sistema centraliza el control del parqueadero, separa las funciones por
-> rol y deja un historial completo de cada movimiento.”
+> rol, deja un historial completo de cada movimiento y el vigilante también
+> puede operarlo desde el móvil como app instalada.”
 
 ---
 
@@ -123,6 +130,7 @@ datos escritos a mano.
 |---|---|
 | El celular no conecta por WiFi | Hacer la demo en el PC con `localhost`. Mostrar la dirección `Network` solo como referencia. |
 | La cámara QR no funciona en el celular | Usar búsqueda manual por placa. Explicar que la cámara requiere HTTPS. |
+| El botón "Instalar app" no aparece | Abrir el menú del navegador y usar "Instalar página como aplicación" / "Adicionar à tela inicial". |
 | El backend no responde | Reiniciar con `iniciar.bat`; si falla, usar capturas/video. |
 | La base demo no tiene datos recientes | Restaurar el respaldo demo o usar el historial existente. |
 | Un botón no responde | No improvisar; pasar al siguiente paso y reportarlo después. |
