@@ -42,16 +42,16 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| AUTH-01 | Login administrador con credenciales correctas | | |
-| AUTH-02 | Login vigilante con credenciales correctas | | |
+| AUTH-01 | Login administrador con credenciales correctas | OK (API) | qa_full_demo.py |
+| AUTH-02 | Login vigilante con credenciales correctas | OK (API) | qa_full_demo.py |
 | AUTH-03 | Login con contraseña incorrecta muestra error claro | | |
 | AUTH-04 | Login con usuario inexistente muestra error claro | | |
-| AUTH-05 | Logout pide confirmación y cierra la sesión | | |
+| AUTH-05 | Logout pide confirmación y cierra la sesión | OK (API) | qa_full_demo.py |
 | AUTH-06 | Tras logout, una ruta protegida redirige al login | | |
 | AUTH-07 | Administrador no puede abrir rutas exclusivas de vigilante | | |
 | AUTH-08 | Vigilante no puede abrir rutas exclusivas de administrador | | |
 | AUTH-09 | La sesión persiste al recargar la página | | |
-| AUTH-10 | El token CSRF viaja en las peticiones que modifican datos | | |
+| AUTH-10 | El token CSRF viaja en las peticiones que modifican datos | OK (API) | qa_full_demo.py |
 
 ---
 
@@ -71,9 +71,9 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| REQ-01 | Lista de solicitudes pendientes carga correctamente | | |
+| REQ-01 | Lista de solicitudes pendientes carga correctamente | OK (API) | qa_full_demo.py |
 | REQ-02 | Estado vacío se muestra cuando no hay solicitudes | | |
-| REQ-03 | Aprobar una solicitud actualiza la lista y muestra toast | | |
+| REQ-03 | Aprobar una solicitud actualiza la lista y muestra toast | OK (API) | qa_full_demo.py |
 | REQ-04 | Rechazar una solicitud actualiza la lista y muestra toast | | |
 | REQ-05 | Suspender un vehículo ya autorizado funciona | | |
 | REQ-06 | Error del servidor no muestra un toast de éxito falso | | |
@@ -84,13 +84,13 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| VEH-01 | Listado y filtros por estado funcionan | | |
-| VEH-02 | Crear vehículo con datos válidos | | |
-| VEH-03 | Validación inline para placa vacía o inválida | | |
-| VEH-04 | Placa duplicada muestra error del backend | | |
+| VEH-01 | Listado y filtros por estado funcionan | OK (API) | qa_full_demo.py |
+| VEH-02 | Crear vehículo con datos válidos | OK (API) | qa_full_demo.py |
+| VEH-03 | Validación inline para placa vacía o inválida | OK (API) | qa_full_demo.py |
+| VEH-04 | Placa duplicada muestra error del backend | OK (API) | qa_full_demo.py |
 | VEH-05 | Persona inexistente o inválida muestra error | | |
-| VEH-06 | Cambiar decisión del vehículo funciona | | |
-| VEH-07 | QR se genera y se puede descargar/ver | | |
+| VEH-06 | Cambiar decisión del vehículo funciona | OK (API) | qa_full_demo.py |
+| VEH-07 | QR se genera y se puede descargar/ver | OK (API) | qa_full_demo.py |
 | VEH-08 | Historial del vehículo carga | | |
 | VEH-09 | Búsqueda/filtro no deja la tabla en estado inconsistente | | |
 
@@ -100,10 +100,10 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| PER-01 | Listado y búsqueda funcionan | | |
-| PER-02 | Crear persona con datos válidos | | |
-| PER-03 | Validación de nombre, tipo y contacto | | |
-| PER-04 | Editar persona actualiza la fila | | |
+| PER-01 | Listado y búsqueda funcionan | OK (API) | qa_full_demo.py |
+| PER-02 | Crear persona con datos válidos | OK (API) | qa_full_demo.py |
+| PER-03 | Validación de nombre, tipo y contacto | OK (API) | qa_full_demo.py |
+| PER-04 | Editar persona actualiza la fila | OK (API) | qa_full_demo.py |
 | PER-05 | Eliminar persona pide confirmación | | |
 | PER-06 | No se permite eliminar una persona con vehículos asociados | | |
 | PER-07 | Estado vacío de búsqueda es claro | | |
@@ -117,10 +117,10 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| HIS-01 | Filtro “Todos” muestra el historial | | |
-| HIS-02 | Filtro “Adentro ahora” muestra solo vehículos sin salida | | |
+| HIS-01 | Filtro “Todos” muestra el historial | OK (API) | qa_full_demo.py |
+| HIS-02 | Filtro “Adentro ahora” muestra solo vehículos sin salida | OK (API) | qa_full_demo.py |
 | HIS-03 | Filtro “Ya salieron” muestra solo movimientos cerrados | | |
-| HIS-04 | Filtros de fecha y placa funcionan | | |
+| HIS-04 | Filtros de fecha y placa funcionan | OK (API) | qa_full_demo.py |
 | HIS-05 | Orden por columnas funciona con teclado | | |
 | HIS-06 | El vigilante también puede consultar el historial | | |
 | HIS-07 | No aparecen vehículos ya salidos en “Adentro ahora” | | |
@@ -131,10 +131,10 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| REP-01 | Resumen del periodo coincide con los movimientos | | |
+| REP-01 | Resumen del periodo coincide con los movimientos | OK (API) | qa_full_demo.py |
 | REP-02 | Totales por tipo de vehículo son correctos | | |
 | REP-03 | Lista de vehículos dentro es correcta | | |
-| REP-04 | Exportación CSV descarga y abre correctamente | | |
+| REP-04 | Exportación CSV descarga y abre correctamente | OK (API) | qa_full_demo.py |
 | REP-05 | Fechas se interpretan en hora local sin desfase | | |
 | REP-06 | Rango inválido muestra error de validación | | |
 
@@ -144,7 +144,7 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| SET-01 | Capacidad actual se muestra correctamente | | |
+| SET-01 | Capacidad actual se muestra correctamente | OK (API) | qa_full_demo.py |
 | SET-02 | Cambiar capacidad válida actualiza el dashboard | | |
 | SET-03 | Capacidad inválida muestra validación inline | | |
 | SET-04 | Crear usuario administrador/vigilante funciona | | |
@@ -158,14 +158,14 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| ACC-01 | Búsqueda por placa válida muestra el vehículo | | |
-| ACC-02 | Placa inexistente muestra mensaje claro | | |
+| ACC-01 | Búsqueda por placa válida muestra el vehículo | OK (API) | qa_full_demo.py |
+| ACC-02 | Placa inexistente muestra mensaje claro | OK (API) | qa_full_demo.py |
 | ACC-03 | Validación por QR funciona en el PC (`localhost`) | | |
-| ACC-04 | Entrada autorizada se registra y muestra toast | | |
-| ACC-05 | Entrada duplicada se bloquea con mensaje | | |
-| ACC-06 | Entrada de vehículo pendiente/rechazado/suspendido se bloquea | | |
-| ACC-07 | Salida de vehículo dentro se registra correctamente | | |
-| ACC-08 | Salida sin entrada activa se bloquea | | |
+| ACC-04 | Entrada autorizada se registra y muestra toast | OK (API) | qa_full_demo.py |
+| ACC-05 | Entrada duplicada se bloquea con mensaje | OK (API) | qa_full_demo.py |
+| ACC-06 | Entrada de vehículo pendiente/rechazado/suspendido se блокea | OK (API) | qa_full_demo.py |
+| ACC-07 | Salida de vehículo dentro se registra correctamente | OK (API) | qa_full_demo.py |
+| ACC-08 | Salida sin entrada activa se bloquea | OK (API) | qa_full_demo.py |
 | ACC-09 | Parqueadero lleno se bloquea (si se puede simular en demo) | | |
 | ACC-10 | El resultado de la operación se ve claro y sin ambigüedad | | |
 
@@ -175,7 +175,7 @@
 
 | ID | Caso | Resultado | Evidencia |
 |---|---|---|---|
-| OCC-01 | Ocupación coincide con los vehículos dentro | | |
+| OCC-01 | Ocupación coincide con los vehículos dentro | OK (API) | qa_full_demo.py |
 | OCC-02 | La vista se actualiza al entrar o salir | | |
 | OCC-03 | Capacidad y porcentaje son coherentes | | |
 | OCC-04 | Estado vacío se muestra cuando no hay vehículos | | |
