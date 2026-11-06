@@ -401,11 +401,35 @@ Integridad: ok
 
 ---
 
-## 11. Siguiente bloque (miércoles 4)
+## 11. Segundo bloque ejecutado (miércoles 4 - móvil/PWA + demo)
 
-1. Crear `parqueadero.demo.db` desde cero con datos ficticios.
-2. Implementar el escenario demo con movimientos recientes.
-3. Crear `iniciar_demo.bat` para arrancar con la base demo.
-4. Actualizar README y guía de otro equipo.
-5. Corregir defectos P0 detectados.
+- [x] HTTPS local con `@vitejs/plugin-basic-ssl`; Vite en red local.
+- [x] `manifest.webmanifest` + `sw.js` + iconos PNG (192/512).
+- [x] Registro del service worker en `main.jsx` (solo en HTTPS).
+- [x] Botón **"Instalar app"** en la barra superior.
+- [x] Barra de navegación inferior para movil (hasta 4 rutas por rol).
+- [x] `ParkingMap.jsx` esqueleto esquemático con capacidad real.
+- [x] Vista de ocupación integrada con el esqueleto.
+- [x] Base demo `parqueadero.demo.db` creada desde cero.
+- [x] Escenario de movimientos recientes con `back/seed_demo_scenario.py`.
+- [x] `iniciar_demo.bat` para arrancar en modo demo.
+- [x] `back/check_demo.py` y `back/qa_smoke_demo.py` para verificar.
+- [x] README, PARA_EJECUTAR, CHECKLIST_QA y GUION_DEMO actualizados.
+- [x] Tests 51 en verde, build de 89 módulos correcto.
+
+**Commits:** `8bd91af` botón PWA, `c270827` base demo + script, `19bcb2f` manual QA.
+
+**Pendiente:**
+- [ ] Probar la PWA en el teléfono (conectividad del móvil pendiente).
+- [ ] QA completo del checklist con defectos registrados.
+
+---
+
+## 12. Tercer bloque (jueves 5 y viernes 6)
+
+1. QA funcional por rol y registro de defectos.
+2. baja/boot del backend y verificar mensajes.
+3. PWA en el teléfono (podría necesitar ayuda del dueño del móvil).
+4. `MANUAL_USUARIO.md` finalando.
+5. Respaldo final y commit de cierre.
 
